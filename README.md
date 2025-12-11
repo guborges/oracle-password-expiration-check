@@ -36,7 +36,7 @@ SELECT username,
 ## Usage
 1. Clone the repository:
 
-git clone https://github.com/SEU_USUARIO/oracle-password-expiration-check.git
+git clone https://github.com/guborges/oracle-password-expiration-check.git
 cd oracle-password-expiration-check
 
 2. Edit the script and configure:
