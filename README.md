@@ -18,26 +18,26 @@ This repository contains a simple shell script that checks Oracle database users
 ## Example query used
 The core logic of the script is based on a query like:
 
-SELECT username,
-       account_status,
-       expiry_date
-  FROM dba_users
- WHERE account_status LIKE 'EXPIRED%'
-    OR expiry_date <= SYSDATE + :days_threshold
- ORDER BY expiry_date;
+    SELECT username,
+           account_status,
+           expiry_date
+      FROM dba_users
+     WHERE account_status LIKE 'EXPIRED%'
+        OR expiry_date <= SYSDATE + :days_threshold
+     ORDER BY expiry_date;
 
 ## Requirements
-- Linux environment
-- Bash
-- SQL*Plus client installed
-- Oracle environment configured (ORACLE_HOME, ORACLE_SID, PATH)
-- User with access to DBA_USERS (e.g. SYS, SYSTEM, or a privileged technical account)
+    - Linux environment
+    - Bash
+    - SQL*Plus client installed
+    - Oracle environment configured (ORACLE_HOME, ORACLE_SID, PATH)
+    - User with access to DBA_USERS (e.g. SYS, SYSTEM, or a privileged technical account)
 
 ## Usage
 1. Clone the repository:
 
-git clone https://github.com/guborges/oracle-password-expiration-check.git
-cd oracle-password-expiration-check
+        git clone https://github.com/guborges/oracle-password-expiration-check.git
+        cd oracle-password-expiration-check
 
 2. Edit the script and configure:
 - The database connection (OS authentication or connect string)
@@ -45,33 +45,33 @@ cd oracle-password-expiration-check
 
 3. Make the script executable:
 
-chmod +x check_password_expiration.sh
+        chmod +x check_password_expiration.sh
 
 4. Run the script:
 
-./check_password_expiration.sh
+        ./check_password_expiration.sh
 # or, using a connect string:
-./check_password_expiration.sh "system/password@TNS"
+        ./check_password_expiration.sh "system/password@TNS"
 
 5. Example output:
 
-Threshold (days): 7
-=================================
-USERNAME|ACCOUNT_STATUS|EXPIRY_DATE
-APP_USER|EXPIRED(GRACE)|2025-12-15 23:59:59
-REPORT_USER|OPEN (EXPIRING SOON)|2025-12-16 23:59:59
+        Threshold (days): 7
+        =================================
+        USERNAME|ACCOUNT_STATUS|EXPIRY_DATE
+        APP_USER|EXPIRED(GRACE)|2025-12-15 23:59:59
+        REPORT_USER|OPEN (EXPIRING SOON)|2025-12-16 23:59:59
 
 ## File structure
-oracle-password-expiration-check/
-├── check_password_expiration.sh
-└── README.md
+    oracle-password-expiration-check/
+    ├── check_password_expiration.sh
+    └── README.md
 
 ## Notes
-This script is intended as a lightweight operational tool and can be adapted to different environments such as:
-- CDB/PDB
-- Multiple databases on the same host
-- HTML/CSV generation
-- Email notifications
+    This script is intended as a lightweight operational tool and can be adapted to different environments such as:
+    - CDB/PDB
+    - Multiple databases on the same host
+    - HTML/CSV generation
+    - Email notifications
 
 It is especially useful in production environments where expired accounts may impact critical applications and batch jobs.
 
